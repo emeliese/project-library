@@ -1,0 +1,17 @@
+/* reference an element via id using # */
+#recipeContainer {
+  display: flex;
+  align-items: auto;
+  flex-wrap: wrap;
+}
+
+.card {
+  background-color: aqua;
+  width: 300px;
+  vertical-align: text-top;
+  margin: 10px;
+}
+
+.card img {
+  margin: 12px;
+}
