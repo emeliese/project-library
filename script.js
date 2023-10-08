@@ -480,7 +480,6 @@ const filterRecipesAll = () => {
 const fewIngredients = () => {
   if (loadedRecipes !== fewIngRecipes) {
     container.innerHTML = "";
-    console.log(fewIngRecipes);
     loadRecipes(fewIngRecipes);
     loadedRecipes = fewIngRecipes;
   }
@@ -489,7 +488,6 @@ const fewIngredients = () => {
 const manyIngredients = () => {
   if (loadedRecipes !== manyIngRecipes) {
     container.innerHTML = "";
-    console.log(manyIngRecipes);
     loadRecipes(manyIngRecipes);
     loadedRecipes = manyIngRecipes;
   }
