@@ -406,10 +406,24 @@ const recipes = [
 ];
 const container = document.getElementById("recipeContainer");
 const activeSelection = "";
+let loadedRecipes;
+const italianButton = document.getElementById("italianRecipesBtn");
+const balancedButton = document.getElementById("balancedRecipesBtn");
+const allButton = document.getElementById("allRecipesBtn");
+const manyIngredientsButton = document.getElementById("manyIngredients");
+const fewIngredientsButton = document.getElementById("fewIngredients");
+italianButton.addEventListener("click", () => filterRecipesItalian());
+balancedButton.addEventListener("click", () => filterRecipesBalanced());
+allButton.addEventListener("click", () => filterRecipesAll());
+manyIngredientsButton.addEventListener("click", () => manyIngredients());
+fewIngredientsButton.addEventListener("click", () => fewIngredients());
 
+//sort check
+let sortedFew = false;
+
+//loop through array and create card per recipe
 const loadRecipes = (recipes) => {
   for (let element of recipes) {
-    console.log(element.source);
     container.innerHTML += `
     <div class="card">
     <p>${element.name}</p>
@@ -418,19 +432,65 @@ const loadRecipes = (recipes) => {
     `;
   }
 };
-//if !active selection show all
-//if active selection - show filtered based on the country that is active selection
-
-// const filterWord = "BBC Good Food";
-// const filterRecipes = (filterWord) => {
-//   const filteredRec = recipes.filter(
-//     (recipe) => recipe.source === filterWord,
-//     loadRecipes(filteredRec)
-//   );
-//   // loadRecipesrecipes.filter((recipe) => recipe.source === filterWord);
-// };
-// filterRecipes();
 
 loadRecipes(recipes);
 
-//start by logging the arrays in the console and filtering them there - CHECK
+//create new arrays
+const italianRecipes = recipes.filter(
+  (recipe) =>
+    recipe.cuisineType.includes("italian") ||
+    recipe.cuisineType.includes("Italian")
+);
+
+const balancedRecipes = recipes.filter((recipe) =>
+  recipe.cuisineType.includes("Balanced")
+);
+
+//use toSorted and toReversed to return a copy and not mutate original array
+const fewIngRecipes = recipes.toSorted(
+  (a, b) => a.ingredients.length - b.ingredients.length
+);
+const manyIngRecipes = fewIngRecipes.toReversed();
+
+//functions to connect to buttons
+const filterRecipesItalian = () => {
+  if (loadedRecipes !== italianRecipes) {
+    container.innerHTML = "";
+    loadRecipes(italianRecipes);
+    loadedRecipes = italianRecipes;
+  }
+};
+
+const filterRecipesBalanced = () => {
+  if (loadedRecipes !== balancedRecipes) {
+    container.innerHTML = "";
+    loadRecipes(balancedRecipes);
+    loadedRecipes = balancedRecipes;
+  }
+};
+
+const filterRecipesAll = () => {
+  if (loadedRecipes !== recipes) {
+    container.innerHTML = "";
+    loadRecipes(recipes);
+    loadedRecipes = recipes;
+  }
+};
+
+const fewIngredients = () => {
+  if (loadedRecipes !== fewIngRecipes) {
+    container.innerHTML = "";
+    console.log(fewIngRecipes);
+    loadRecipes(fewIngRecipes);
+    loadedRecipes = fewIngRecipes;
+  }
+};
+
+const manyIngredients = () => {
+  if (loadedRecipes !== manyIngRecipes) {
+    container.innerHTML = "";
+    console.log(manyIngRecipes);
+    loadRecipes(manyIngRecipes);
+    loadedRecipes = manyIngRecipes;
+  }
+};
