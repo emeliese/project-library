@@ -237,12 +237,24 @@ let sortedFew = false;
 //loop through array and create card per recipe
 const loadRecipes = (recipes) => {
   for (let element of recipes) {
+    const url = () => {
+      if (element.hasOwnProperty("url")) {
+        const url = "url";
+        return url;
+      } else if (element.hasOwnProperty("URL")) {
+        const url = "URL";
+        return url;
+      }
+    };
     container.innerHTML += `
     <div class="card">
     <p>${element.name}</p>
+    <p>Type of food: ${element.cuisineType}</p>
     <img src=${element.image} alt=${element.name} width="250" height="250">
-    </div>
-    `;
+    <p>${element.ingredients}</p>
+    <p>Time needed: ${element.totalTime} minutes</p>
+    <p><a href="${element[url()]}">Find the recipe here</a></p>
+    </div>`;
   }
 };
 
