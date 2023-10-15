@@ -237,6 +237,7 @@ let sortedFew = false;
 //loop through array and create card per recipe
 const loadRecipes = (recipes) => {
   for (let element of recipes) {
+    //get url for both "URL" and "url"
     const url = () => {
       if (element.hasOwnProperty("url")) {
         const url = "url";
@@ -246,13 +247,23 @@ const loadRecipes = (recipes) => {
         return url;
       }
     };
+    // hide totalTime if null
+    const isHidden = () => {
+      if (!element.totalTime) {
+        const hide = "hidden";
+        return hide;
+      } else {
+        const hide = "";
+        return hide;
+      }
+    };
     container.innerHTML += `
     <div class="card">
     <p>${element.name}</p>
     <p>Type of food: ${element.cuisineType}</p>
     <img src=${element.image} alt=${element.name} width="250" height="250">
     <p>${element.ingredients}</p>
-    <p>Time needed: ${element.totalTime} minutes</p>
+    <p ${isHidden()}>Time needed: ${element.totalTime} minutes</p>
     <p><a href="${element[url()]}">Find the recipe here</a></p>
     </div>`;
   }
