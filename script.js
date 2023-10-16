@@ -247,23 +247,27 @@ const loadRecipes = (recipes) => {
         return url;
       }
     };
+
     // hide totalTime if null
-    const isHidden = () => {
-      if (!element.totalTime) {
-        const hide = "hidden";
-        return hide;
-      } else {
-        const hide = "";
-        return hide;
+    const hiddenAttribute = element.totalTime ? "" : "hidden";
+
+    //loop through inggredients and add to each card
+    const ingredientsList = (ingredients) => {
+      let list = ``;
+      for (let ingredient of ingredients) {
+        list += `<p>▪ ${ingredient}</p>`;
       }
+      return list;
     };
+
     container.innerHTML += `
     <div class="card">
-    <p>${element.name}</p>
+    <p class="heading">${element.name}</p>
     <p>Type of food: ${element.cuisineType}</p>
     <img src=${element.image} alt=${element.name} width="250" height="250">
-    <p>${element.ingredients}</p>
-    <p ${isHidden()}>Time needed: ${element.totalTime} minutes</p>
+    <p class="heading">You will need:</p>
+    <p>${ingredientsList(element.ingredients)}</p>
+    <p ${hiddenAttribute}>Time needed: ${element.totalTime} minutes</p>
     <p><a href="${element[url()]}">Find the recipe here</a></p>
     </div>`;
   }

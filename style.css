@@ -15,3 +15,10 @@
 .card img {
   margin: 12px;
 }
+
+.heading {
+  font-weight: 800;
+}
+#recipeContainer {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
